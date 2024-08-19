@@ -1,0 +1,37 @@
+openapi: '3.0.3'
+info:
+  title: JSONPlaceholder
+  version: '1.0'
+servers:
+  - url: https://jsonplaceholder.typicode.com/
+
+components:
+  schemas:
+    event:
+      type: object
+      properties:
+        name:
+         type: string
+paths:
+  /events/{start-date}:
+    get:
+      description: Get events by start date.
+      parameters:
+      - name: start-date
+        in: path
+        description: Get events by start date.
+        required: true
+        style: form
+        schema:
+          type: string
+          format: date
+          maxItems: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/event'
